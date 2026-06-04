@@ -154,7 +154,7 @@ utils/
 ### 1. Clone and install
 
 ```bash
-git clone https://github.com/your-username/crossatention.git
+git clone https://github.com/AveRyCarNey/crossatention.git
 cd crossatention
 npm install
 ```
