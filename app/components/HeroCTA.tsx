@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { supabase } from '@/utils/supabase';
+import type { AuthChangeEvent } from '@supabase/supabase-js';
 
 interface HeroCTAProps {
   initialSessionExists: boolean;
@@ -26,7 +27,7 @@ export default function HeroCTA({ initialSessionExists }: HeroCTAProps) {
     checkSession();
 
     // Listen to real-time changes to update instantly if state changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: AuthChangeEvent, session) => {
       setSessionExists(!!session);
     });
 
