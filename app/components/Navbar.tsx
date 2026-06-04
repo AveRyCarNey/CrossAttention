@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { createBrowserClient } from '@supabase/ssr';
-import type { AuthChangeEvent } from '@supabase/supabase-js';
+import type { AuthChangeEvent, Session } from '@supabase/supabase-js';
 import NotificationBell from './NotificationBell';
 import LogoutButton from './LogoutButton';
 
@@ -62,7 +62,7 @@ export default function Navbar() {
     // Sincronizar con cambios de sesión en tiempo real
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (event: AuthChangeEvent, session) => {
+    } = supabase.auth.onAuthStateChange(async (event: AuthChangeEvent, session: Session | null) => {
       if (event === 'SIGNED_IN' && session?.user) {
         setUserEmail(session.user.email ?? null);
         setUserName(session.user.user_metadata?.name || session.user.user_metadata?.display_name || null);

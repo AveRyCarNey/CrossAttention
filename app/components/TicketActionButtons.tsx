@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/utils/supabase';
+import type { UserResponse } from '@supabase/supabase-js';
 
 // ─── Props ────────────────────────────────────────────────────
 // Props mínimas: el padre decide si renderizar este componente o no.
@@ -26,8 +27,8 @@ export default function TicketActionButtons({ ticketId, status, assignedTo, curr
     if (propUserId) {
       setCurrentUserId(propUserId);
     } else if (!currentUserId) {
-      supabase.auth.getUser().then(({ data: { user } }) => {
-        if (user) setCurrentUserId(user.id);
+      supabase.auth.getUser().then((res: UserResponse) => {
+        if (res.data.user) setCurrentUserId(res.data.user.id);
       });
     }
   }, [propUserId, currentUserId]);
@@ -61,7 +62,8 @@ export default function TicketActionButtons({ ticketId, status, assignedTo, curr
         .select('user_id, title')
         .eq('id', ticketId)
         .single()
-        .then(({ data }) => {
+        .then((res: any) => {
+          const data = res.data;
           if (data?.user_id) {
             supabase.from('notifications').insert({
               user_id: data.user_id,
@@ -112,7 +114,8 @@ export default function TicketActionButtons({ ticketId, status, assignedTo, curr
         .select('user_id, title')
         .eq('id', ticketId)
         .single()
-        .then(({ data }) => {
+        .then((res: any) => {
+          const data = res.data;
           if (data?.user_id) {
             supabase.from('notifications').insert({
               user_id: data.user_id,
