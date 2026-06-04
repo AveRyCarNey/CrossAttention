@@ -1,0 +1,171 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap");
+@import "tailwindcss";
+
+/* ============================================================
+   CROSSATTENTION — CYBER-POP DESIGN SYSTEM
+   Tailwind v4: tokens definidos en @theme {}
+   ============================================================ */
+
+@theme {
+  /* Brand palette */
+  --color-cross-bg:       #FFEA6C;
+  --color-cross-card:     #FFA6FB;
+  --color-cross-accent:   #FF61F8;
+  --color-cross-text:     #0F172A;
+  --color-cross-text-dim: #334155;
+
+  /* Utility extensions */
+  --color-cross-card-hover: #ff8ef9;
+  --color-cross-accent-dim: #ff61f820;
+
+  /* Typography */
+  --font-display: "Space Grotesk", "Bebas Neue", ui-sans-serif;
+  --font-body:    "DM Sans", ui-sans-serif;
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes pulse-badge {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.08); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+@keyframes slide-header {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+.animate-fade-in-up {
+  animation: fade-in-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease both;
+}
+
+.animate-slide-header {
+  animation: slide-header 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    #ffa6fb 25%,
+    #ffd1fe 50%,
+    #ffa6fb 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Row slide-in with stagger support via inline style */
+.ticket-row {
+  animation: fade-in-left 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Scrollbar styling */
+.ticket-list-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.ticket-list-scroll::-webkit-scrollbar-track {
+  background: #FFA6FB;
+}
+.ticket-list-scroll::-webkit-scrollbar-thumb {
+  background: #0F172A;
+  border-radius: 99px;
+}
+
+/* Priority pulse on high */
+.priority-alta {
+  animation: pulse-badge 2s ease-in-out infinite;
+}
+
+/* ============================================================
+   GOOGLE FONTS IMPORT (Moved to the top)
+   ============================================================ */
+
+/* ============================================================
+   BASE RESET
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "DM Sans", ui-sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   LOADER — EQUALIZER PULSE ANIMATION (CSS puro, sin Tailwind)
+   ============================================================ */
+.loader-ul {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  gap: 6px;
+  height: 50px;
+}
+
+.loader-li {
+  background-color: black;
+  width: 12px;
+  height: 10px;
+  animation: eq-loading 1s ease-in-out infinite;
+}
+
+.loader-li:nth-child(1) { animation-delay: 0s; }
+.loader-li:nth-child(2) { animation-delay: -0.2s; }
+.loader-li:nth-child(3) { animation-delay: -0.4s; }
+.loader-li:nth-child(4) { animation-delay: -0.6s; }
+.loader-li:nth-child(5) { animation-delay: -0.8s; }
+
+@keyframes eq-loading {
+  0%, 100% { height: 10px; }
+  50%       { height: 50px; }
+}
